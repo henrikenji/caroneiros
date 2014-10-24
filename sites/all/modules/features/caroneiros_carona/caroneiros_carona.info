@@ -1,0 +1,17 @@
+name = Caroneiros Carona
+core = 7.x
+package = Caroneiros
+version = 7.x-1.0
+project = caroneiros_carona
+dependencies[] = date
+dependencies[] = features
+dependencies[] = number
+dependencies[] = text
+features[features_api][] = api:2
+features[field_base][] = body
+features[field_base][] = field_data
+features[field_base][] = field_vagas
+features[field_instance][] = node-carona-body
+features[field_instance][] = node-carona-field_data
+features[field_instance][] = node-carona-field_vagas
+features[node][] = carona
