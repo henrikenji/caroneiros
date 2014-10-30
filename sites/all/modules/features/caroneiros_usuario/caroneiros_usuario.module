@@ -3,3 +3,36 @@
  * @file
  * Drupal needs this blank file.
  */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function caroneiros_usuario_form_user_register_form_alter(&$form, &$form_state) {
+    //dpm($form);
+
+    // Aplica um máscara no campo CPF
+    $form['field_cpf'][LANGUAGE_NONE][0]['value']['#mask'] = '999.999.999-99';
+    $form['field_cpf'][LANGUAGE_NONE][0]['value']['#process'] = array('masked_input_process_callback');
+
+    // Adiciona um funcao de validacao do formulario
+    $form['#validate'][] = 'caroneiros_usuario_form_user_register_form_alter_validate';
+}
+
+/**
+ * Validate callback.
+ */
+function caroneiros_usuario_form_user_register_form_alter_validate($form, $form_state) {
+    $cpf = $form_state['values']['field_cpf'][LANGUAGE_NONE][0]['value'];
+
+    if (!caroneiros_usuario_valid_cpf($cpf)) {
+        form_set_error('field_cpf', t('Invalid CPF'));
+    }
+}
+
+/**
+ * Valida CPF
+ */
+function caroneiros_usuario_valid_cpf($cpf) {
+    //TODO Verificar se cpf ja existe na base de dados e se ele é valido
+    return FALSE;
+}
