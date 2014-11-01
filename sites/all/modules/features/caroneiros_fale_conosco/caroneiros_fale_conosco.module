@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Caroneiros: Fale Conosco feature.
+ */
+
+include_once 'caroneiros_fale_conosco.features.inc';

@@ -1,0 +1,11 @@
+name = Caroneiros: Fale Conosco
+core = 7.x
+package = Caroneiros
+version = 7.x-1.0
+project = caroneiros_fale_conosco
+dependencies[] = features
+dependencies[] = uuid_features
+__drupal_alter_by_ref[][node][webform] = webform
+features[features_api][] = api:2
+features[node][] = webform
+features[uuid_node][] = 1b18fdfa-04b4-47ef-95da-5aba6c7c2f4f
