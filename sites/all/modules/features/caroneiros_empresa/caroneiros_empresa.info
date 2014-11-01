@@ -4,6 +4,7 @@ core = 7.x
 package = Caroneiros
 version = 7.x-1.0
 project = caroneiros_empresa
+dependencies[] = br_tax_number_fields
 dependencies[] = image
 dependencies[] = text
 features[features_api][] = api:2
