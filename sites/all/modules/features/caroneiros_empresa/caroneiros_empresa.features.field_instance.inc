@@ -35,12 +35,12 @@ function caroneiros_empresa_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'br_tax_number_fields',
       'settings' => array(
         'size' => 20,
       ),
-      'type' => 'text_textfield',
-      'weight' => 3,
+      'type' => 'number_cnpj',
+      'weight' => 5,
     ),
   );
 
@@ -74,7 +74,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -118,7 +118,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 0,
     ),
   );
 
@@ -153,7 +153,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -187,7 +187,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 3,
     ),
   );
 
@@ -221,7 +221,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 6,
     ),
   );
 
@@ -255,7 +255,7 @@ function caroneiros_empresa_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
