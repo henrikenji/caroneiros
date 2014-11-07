@@ -107,6 +107,114 @@ function caroneiros_carona_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-carona-field_destino'
+  $field_instances['node-carona-field_destino'] = array(
+    'bundle' => 'carona',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_destino',
+    'label' => 'Destino',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'location_cck',
+      'settings' => array(),
+      'type' => 'location',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance: 'node-carona-field_origem'
+  $field_instances['node-carona-field_origem'] = array(
+    'bundle' => 'carona',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_origem',
+    'label' => 'Origem',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'location_cck',
+      'settings' => array(),
+      'type' => 'location',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-carona-field_tipo'
+  $field_instances['node-carona-field_tipo'] = array(
+    'bundle' => 'carona',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_tipo',
+    'label' => 'Tipo',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-carona-field_vagas'
   $field_instances['node-carona-field_vagas'] = array(
     'bundle' => 'carona',
@@ -157,6 +265,9 @@ function caroneiros_carona_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Data');
+  t('Destino');
+  t('Origem');
+  t('Tipo');
   t('Vagas');
 
   return $field_instances;

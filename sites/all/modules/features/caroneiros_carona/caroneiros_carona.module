@@ -5,3 +5,57 @@
  */
 
 include_once 'caroneiros_carona.features.inc';
+
+/**
+ * Implements hook_preprocess_node().
+ */
+ function caroneiros_carona_preprocess_node(&$variables) {
+    if ($variables['type'] == 'carona') {
+        $user = user_load($variables['uid']);
+        $name = $user->field_nome[LANGUAGE_NONE][0]['value'];
+        switch ($variables['field_tipo'][LANGUAGE_NONE][0]['value']) {
+            case 'offer':
+                $variables['title'] = t('@user is offering a ride', array('@user' => $name));
+                $variables['button'] = l(t('Request ride'), 'node/1', array('attributes' => array('class' => array('btn', 'btn-default'))));
+                
+                break;
+            case 'request':
+                $variables['title'] = t('@user is offering is looking for a ride', array('@user' => $name));
+                $variables['button'] = l(t('Offer ride'), 'node/1', array('attributes' => array('class' => array('btn', 'btn-default'))));
+                break;
+        }
+        
+        list($date, $hour) = explode(' ', $variables['field_data'][0]['value']);
+        $variables['date'] = $date;
+        $variables['hour'] = $hour;
+        $variables['vaccancies'] = $variables['field_vagas'][0]['value'];
+        $variables['distance'] = 'TODO';
+        
+        // Map
+        $locations = getdirections_load_locations($variables['nid'], 'node');
+        
+        foreach ($locations as $location) {
+            $locs[] = _getdirections_loadaddress($location);
+            $latlons[] = $location['latitude'] . ',' . $location['longitude'];
+        }
+        
+        $getdirections_defaults = getdirections_defaults();
+        $getdirections_misc = getdirections_misc_defaults();
+        getdirections_setup_map($getdirections_defaults, $getdirections_misc);
+        $getdirections_settings = getdirections_get_settings($getdirections_defaults, $getdirections_misc);
+        $getdirections_settings['latlons'] = implode('|', $latlons);
+
+        $mapid = getdirections_get_key();
+        drupal_add_js(array('getdirections' => array($mapid => $getdirections_settings)), 'setting');
+        
+        $variables['content']['map'] = array(
+            '#theme' => 'getdirections_show_locations_via',
+            '#mapid' => $mapid,
+            '#width' => '548px',
+            '#height' => '356px',
+            '#locs' => $locs
+        );
+        
+        drupal_add_css(drupal_get_path('module', 'caroneiros_carona') . '/css/caroneiros_carona.css');
+    }
+ }
