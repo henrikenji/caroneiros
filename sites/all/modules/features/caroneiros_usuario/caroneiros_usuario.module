@@ -11,11 +11,11 @@ function caroneiros_usuario_form_user_register_form_alter(&$form, &$form_state) 
     //dpm($form);
 
     // Aplica um máscara no campo CPF
-    $form['field_cpf'][LANGUAGE_NONE][0]['value']['#mask'] = '999.999.999-99';
-    $form['field_cpf'][LANGUAGE_NONE][0]['value']['#process'] = array('masked_input_process_callback');
+    //$form['field_cpf'][LANGUAGE_NONE][0]['value']['#mask'] = '999.999.999-99';
+    //$form['field_cpf'][LANGUAGE_NONE][0]['value']['#process'] = array('masked_input_process_callback');
 
     // Adiciona um funcao de validacao do formulario
-    $form['#validate'][] = 'caroneiros_usuario_form_user_register_form_alter_validate';
+    //$form['#validate'][] = 'caroneiros_usuario_form_user_register_form_alter_validate';
 }
 
 /**
@@ -29,10 +29,23 @@ function caroneiros_usuario_form_user_register_form_alter_validate($form, $form_
     }
 }
 
-/**
- * Valida CPF
- */
-function caroneiros_usuario_valid_cpf($cpf) {
-    //TODO Verificar se cpf ja existe na base de dados e se ele é valido
-    return FALSE;
+function caroneiros_usuario_theme() {
+  $items = array();
+    
+  $items['user_login'] = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
+    'template' => 'user-login',
+  );
+  $items['user_register_form'] = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
+    'template' => 'user-register-form',
+  );
+  $items['user_pass'] = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
+    'template' => 'user-pass',
+  );
+  return $items;
 }
