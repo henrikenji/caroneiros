@@ -58,4 +58,11 @@ include_once 'caroneiros_carona.features.inc';
         
         drupal_add_css(drupal_get_path('module', 'caroneiros_carona') . '/css/caroneiros_carona.css');
     }
- }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function caroneiros_carona_form_carona_node_form_alter(&$form, &$form_state) {
+    dpm($form);
+}
