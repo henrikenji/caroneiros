@@ -61,8 +61,20 @@ include_once 'caroneiros_carona.features.inc';
 }
 
 /**
+ * Implements hook_theme().
+ */
+function caroneiros_carona_theme($existing, $type, $theme, $path) {
+  return array(
+    'carona_node_form' => array(
+      'render element' => 'form',
+      'template' => 'carona-node-form',
+      'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
+    ),
+  );
+}
+
+/**
  * Implements hook_form_alter().
  */
 function caroneiros_carona_form_carona_node_form_alter(&$form, &$form_state) {
-    dpm($form);
 }
