@@ -74,7 +74,8 @@ function caroneiros_carona_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
 function caroneiros_carona_form_carona_node_form_alter(&$form, &$form_state) {
+    $form['#attached']['js'][] = drupal_get_path('module', 'caroneiros_carona') . '/js/caroneiros_carona.form.js';
 }
