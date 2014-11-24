@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Code for the Caroneiros Review feature.
+ */
+
+include_once 'caroneiros_review.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
+    global $user;
+    
+    // Hide and set a default value for entity reference field
+    $form['field_user'][LANGUAGE_NONE]['#default_value'] = $user->uid;
+    $form['field_user'][LANGUAGE_NONE]['#access'] = FALSE;
+}
