@@ -7,28 +7,62 @@
 include_once 'caroneiros_carona.features.inc';
 
 /**
+ * Implements hook_menu().
+ */
+function caroneiros_carona_menu() {
+    $items = array();
+
+    $items['node/%node/request'] = array(
+        'title' => t('Request'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('caroneiros_carona_request_form', 1),
+        'access callback' => 'user_is_logged_in',
+        'file' => 'caroneiros_carona.pages.inc',
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/**
  * Implements hook_preprocess_node().
  */
  function caroneiros_carona_preprocess_node(&$variables) {
     if ($variables['type'] == 'carona') {
-        $user = user_load($variables['uid']);
-        $name = $user->field_nome[LANGUAGE_NONE][0]['value'];
+        global $user;
+        $nid = $variables['nid'];
+        $account = user_load($variables['uid']);
+        $name = $account->field_nome[LANGUAGE_NONE][0]['value'];
+
+        $query = new EntityFieldQuery();
+        $ids = $query->entityCondition('entity_type', 'node')
+                ->entityCondition('bundle', 'request')
+                ->propertyCondition('status', array(1), 'IN')
+                ->fieldCondition('field_carona', 'target_id', $nid)
+                ->execute();
+                
+        $nodes = array();        
+        if (!empty($ids)) {
+            $nodes = node_load_multiple(array_keys($ids['node']));
+        }
+
         switch ($variables['field_tipo'][LANGUAGE_NONE][0]['value']) {
             case 'offer':
                 $variables['title'] = t('@user is offering a ride', array('@user' => $name));
-                $variables['button'] = l(t('Request ride'), 'node/1', array('attributes' => array('class' => array('btn', 'btn-default'))));
-                
+                if ($user->uid != $account->uid && $variables['field_vagas'][0]['value'] > count($nodes)) {
+                    $variables['button'] = l(t('Request ride'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
+                }
                 break;
             case 'request':
                 $variables['title'] = t('@user is offering is looking for a ride', array('@user' => $name));
-                $variables['button'] = l(t('Offer ride'), 'node/1', array('attributes' => array('class' => array('btn', 'btn-default'))));
+                $variables['button'] = l(t('Offer ride'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
                 break;
         }
         
         list($date, $hour) = explode(' ', $variables['field_data'][0]['value']);
         $variables['date'] = $date;
         $variables['hour'] = $hour;
-        $variables['vaccancies'] = $variables['field_vagas'][0]['value'];
+        $variables['vaccancies'] = $variables['field_vagas'][0]['value'] - count($nodes);
         $variables['distance'] = 'TODO';
         
         // Map
@@ -55,7 +89,7 @@ include_once 'caroneiros_carona.features.inc';
             '#height' => '356px',
             '#locs' => $locs
         );
-        
+
         drupal_add_css(drupal_get_path('module', 'caroneiros_carona') . '/css/caroneiros_carona.css');
     }
 }
@@ -78,4 +112,27 @@ function caroneiros_carona_theme($existing, $type, $theme, $path) {
  */
 function caroneiros_carona_form_carona_node_form_alter(&$form, &$form_state) {
     $form['#attached']['js'][] = drupal_get_path('module', 'caroneiros_carona') . '/js/caroneiros_carona.form.js';
+}
+
+/**
+ * Implements hook_cron().
+ */
+function caroneiros_carona_cron() {
+    $date = date('Y-m-d H:i:s', REQUEST_TIME);
+    $query = new EntityFieldQuery();
+    $ids = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'carona')
+            ->propertyCondition('status', 1)
+            ->fieldCondition('field_data', 'value', $date, '<=')
+            ->execute();
+                
+    $nodes = array();        
+    if (!empty($ids)) {
+        $nodes = node_load_multiple(array_keys($ids['node']));
+    }
+
+    foreach ($nodes as $node) {
+        $node->status = 0;
+        node_save($node);
+    }
 }
