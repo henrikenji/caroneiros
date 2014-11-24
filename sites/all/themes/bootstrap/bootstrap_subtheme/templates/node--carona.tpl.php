@@ -27,7 +27,9 @@
     <?php print render($content['map']); ?>
   </div>
 
-  <div>
+  <?php if (!empty($button)): ?>
+    <div>
       <?php print $button; ?>
-  <div>
+    <div>
+  <?php endif;?>
 </div>
