@@ -16,3 +16,45 @@ function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
     $form['field_user'][LANGUAGE_NONE]['#default_value'] = $user->uid;
     $form['field_user'][LANGUAGE_NONE]['#access'] = FALSE;
 }
+
+/**
+ * Implements hook_preprocess_node().
+ */
+ function caroneiros_review_preprocess_node(&$variables) {
+    if ($variables['type'] == 'carona') {
+        dpm($variables);
+        global $user;
+        $nid = $variables['nid'];
+        $account = user_load($variables['uid']);
+        $name = $account->field_nome[LANGUAGE_NONE][0]['value'];
+
+        $query = new EntityFieldQuery();
+        $ids = $query->entityCondition('entity_type', 'node')
+                ->entityCondition('bundle', 'review')
+                ->propertyCondition('status', 1)
+                ->fieldCondition('field_user', 'target_id', $account->uid)
+                ->execute();
+
+        $nodes = array();
+        if (!empty($ids)) {
+            $nodes = node_load_multiple(array_keys($ids['node']));
+            $sum = 0;
+            foreach ($nodes as $node) {
+                $sum += $node->field_rating[LANGUAGE_NONE][0]['rating'];
+            }
+
+            $mean = $sum/count($nodes);
+            $variables['fivestar'] = array(
+                '#theme' => 'fivestar_static',
+                '#rating' => $mean,
+                '#stars' => 5,
+                '#tag' => 'rating',
+                '#widget' => array(
+                    'name' => 'whatever',
+                    'css' => '',
+                ),
+
+            );
+        }
+    }
+}

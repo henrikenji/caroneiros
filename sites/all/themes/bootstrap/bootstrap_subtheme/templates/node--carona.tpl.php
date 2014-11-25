@@ -11,7 +11,14 @@
       <div class="clearfix">
         <?php if ($display_submitted): ?>
           <div class="carona-info meta submitted pull-left">
-            <?php print $user_picture; ?>
+            <div class>
+              <?php print $user_picture; ?>
+            </div>
+            <?php if (!empty($fivestar)): ?>
+              <div>
+                <?php print render($fivestar);?>
+              </div>
+            <?php endif;?>
           </div>
           <div>
             <p><span class="glyphicon glyphicon-calendar"></span> <?php print $date; ?></p>
@@ -28,7 +35,7 @@
   </div>
 
   <?php if (!empty($button)): ?>
-    <div>
+    <div class="request-carona">
       <?php print $button; ?>
     <div>
   <?php endif;?>
