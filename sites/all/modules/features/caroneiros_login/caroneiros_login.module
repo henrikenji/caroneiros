@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Caroneiros Login feature.
+ */
+
+include_once 'caroneiros_login.features.inc';
