@@ -10,6 +10,15 @@
 function caroneiros_usuario_form_user_register_form_alter(&$form, &$form_state) {
     //dpm($form);
 
+	// Coloca os campos de senha dentro de um supercampo senha
+	$form['account']['pass_field'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Senha',
+		'pass' => $form['account']['pass'],
+	);
+	unset($form['account']['pass']);
+	unset($form['account']['mail']['#description']);
+	
     // Aplica um máscara no campo CPF
     //$form['field_cpf'][LANGUAGE_NONE][0]['value']['#mask'] = '999.999.999-99';
     //$form['field_cpf'][LANGUAGE_NONE][0]['value']['#process'] = array('masked_input_process_callback');
