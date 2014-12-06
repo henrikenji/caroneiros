@@ -44,18 +44,29 @@ function caroneiros_carona_views_default_views() {
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['picture']['image_style'] = 'thumbnail';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: User: Nome */
+  $handler->display->display_options['fields']['field_nome']['id'] = 'field_nome';
+  $handler->display->display_options['fields']['field_nome']['table'] = 'field_data_field_nome';
+  $handler->display->display_options['fields']['field_nome']['field'] = 'field_nome';
+  $handler->display->display_options['fields']['field_nome']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_nome']['label'] = '';
+  $handler->display->display_options['fields']['field_nome']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_nome']['element_label_colon'] = FALSE;
   /* Field: Content: Tipo */
   $handler->display->display_options['fields']['field_tipo']['id'] = 'field_tipo';
   $handler->display->display_options['fields']['field_tipo']['table'] = 'field_data_field_tipo';
   $handler->display->display_options['fields']['field_tipo']['field'] = 'field_tipo';
   $handler->display->display_options['fields']['field_tipo']['label'] = '';
+  $handler->display->display_options['fields']['field_tipo']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_tipo']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[field_nome] [field_tipo] carona';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Content: Data */
   $handler->display->display_options['fields']['field_data']['id'] = 'field_data';
   $handler->display->display_options['fields']['field_data']['table'] = 'field_data_field_data';
@@ -79,6 +90,14 @@ function caroneiros_carona_views_default_views() {
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Destino */
+  $handler->display->display_options['fields']['field_destino']['id'] = 'field_destino';
+  $handler->display->display_options['fields']['field_destino']['table'] = 'field_data_field_destino';
+  $handler->display->display_options['fields']['field_destino']['field'] = 'field_destino';
+  /* Field: Content: Origem */
+  $handler->display->display_options['fields']['field_origem']['id'] = 'field_origem';
+  $handler->display->display_options['fields']['field_origem']['table'] = 'field_data_field_origem';
+  $handler->display->display_options['fields']['field_origem']['field'] = 'field_origem';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -119,6 +138,9 @@ function caroneiros_carona_views_default_views() {
     t('next ›'),
     t('last »'),
     t('author'),
+    t('[field_nome] [field_tipo] carona'),
+    t('Destino'),
+    t('Origem'),
     t('Page'),
   );
   $export['caronas_disponiveis'] = $view;
