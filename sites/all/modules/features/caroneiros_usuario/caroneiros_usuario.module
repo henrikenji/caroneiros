@@ -58,3 +58,7 @@ function caroneiros_usuario_theme() {
   );
   return $items;
 }
+
+function caroneiros_usuario_menu_alter(&$items) {
+  $items['user/%user']['access callback'] = 'user_is_logged_in';
+}
