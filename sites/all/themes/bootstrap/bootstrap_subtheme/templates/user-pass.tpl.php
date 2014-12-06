@@ -5,7 +5,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-2 col-md-offset-4">
+    <div class="text-center">
         <?php print render($form['actions']);?>
     </div>
 </div>
