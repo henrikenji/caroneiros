@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Caroneiros Home feature.
+ */
+
+include_once 'caroneiros_home.features.inc';
