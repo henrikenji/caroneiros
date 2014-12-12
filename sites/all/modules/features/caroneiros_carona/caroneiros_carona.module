@@ -141,21 +141,22 @@ function caroneiros_carona_cron() {
  * Implements hook_preprocess_views_view_fields().
  */
 function caroneiros_carona_preprocess_views_view_fields(&$variables) {
-    //dpm($variables);
-    $id = $variables['id'];
-    $destino = $variables['view']->result[$id-1]->field_field_destino[0]['raw'];
-    $variables['fields']['field_destino']->content =
-        '<div class="location">' .
-            $destino['street'] . ', ' .
-            $destino['city'] . ' - ' .
-            $destino['province'] .
-        '</div>';
+    if ($variables['view']->name == 'caronas_disponiveis') {
+        $id = $variables['id'];
+        $destino = $variables['view']->result[$id-1]->field_field_destino[0]['raw'];
+        $variables['fields']['field_destino']->content =
+            '<div class="location">' .
+                $destino['street'] . ', ' .
+                $destino['city'] . ' - ' .
+                $destino['province'] .
+            '</div>';
 
-    $origem = $variables['view']->result[$id-1]->field_field_origem[0]['raw'];
-    $variables['fields']['field_origem']->content =
-        '<div class="location">' .
-            $origem['street'] . ', ' .
-            $origem['city'] . ' - ' .
-            $origem['province'] .
-        '</div>';
+        $origem = $variables['view']->result[$id-1]->field_field_origem[0]['raw'];
+        $variables['fields']['field_origem']->content =
+            '<div class="location">' .
+                $origem['street'] . ', ' .
+                $origem['city'] . ' - ' .
+                $origem['province'] .
+            '</div>';
+    }
 }
