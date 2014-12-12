@@ -1,7 +1,7 @@
 name = Caroneiros Home
 description = Banner e icones que compoem a home
 core = 7.x
-package = Features
+package = Caroneiros
 version = 7.x-1.0
 project = caroneiros_home
 dependencies[] = context
