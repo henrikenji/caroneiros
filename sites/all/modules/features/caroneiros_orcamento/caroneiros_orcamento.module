@@ -4,21 +4,32 @@
  * Drupal needs this blank file.
  */
  
+
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function caroneiros_fale_conosco_form_alter(&$form, &$form_state,$form_id) {
-//    dpm($form);
-//    dpm($form_id);
-//    id do formulario: webform_client_form_2
-
-    // Aplica um máscara no campo telefone
-    $form['submitted']['telefone']['#mask'] = '(99)99999 9999';
-//TODO arrumar mascara
-    $form['submitted']['telefone']['#process'] = array('masked_input_process_callback');
-
-
-//  TODO Validar e-mail
+  * Implements hook_theme_registry_alter().
+  */
+function caroneiros_fale_conosco_theme_registry_alter(&$theme_registry) {
+    $nid = variable_get('caroneiros_fale_conosco_webform', 0);
+    if ($nid) {
+        $theme_registry['webform_form_' . $nid] = array(
+            'render element' => 'form',
+            'template' => 'sites/all/themes/bootstrap/bootstrap_subtheme/templates/webform-form--contato',
+            'type' => 'module',
+            'theme path' => 'sites/all/themes/bootstrap/bootstrap_subtheme',
+            'preprocess functions' => array(),
+            'process functions' => array(),
+        );
+    }
     
+    $nid = variable_get('caroneiros_orcamento_webform', 0);
+    if ($nid) {
+        $theme_registry['webform_form_' . $nid] = array(
+            'render element' => 'form',
+            'template' => 'sites/all/themes/bootstrap/bootstrap_subtheme/templates/webform-form--orcamento',
+            'type' => 'module',
+            'theme path' => 'sites/all/themes/bootstrap',
+            'preprocess functions' => array(),
+            'process functions' => array(),
+        );
+    }
 }
-    
