@@ -40,7 +40,7 @@ function caroneiros_review_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'display_summary' => 0,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -74,7 +74,7 @@ function caroneiros_review_field_default_field_instances() {
           ),
         ),
         'type' => 'fivestar_formatter_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -119,7 +119,7 @@ function caroneiros_review_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',

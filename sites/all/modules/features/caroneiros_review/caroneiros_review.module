@@ -12,6 +12,8 @@ include_once 'caroneiros_review.features.inc';
 function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
     global $user;
     
+    dpm($form);
+    
     // Hide and set a default value for entity reference field
     $form['field_user'][LANGUAGE_NONE]['#default_value'] = $user->uid;
     $form['field_user'][LANGUAGE_NONE]['#access'] = FALSE;
@@ -57,4 +59,15 @@ function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
             );
         }
     }
+}
+
+function caroneiros_review_theme() {
+  $items = array();
+    
+  $items['review_node_form'] = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
+    'template' => 'review-node-form',
+  );
+  return $items;
 }
