@@ -24,3 +24,8 @@
         <?php print render($form['actions']);?>
     </div>
 </div>
+
+<div>
+    <?php hide($form['field_user']); ?>
+    <?php print drupal_render_children($form); ?>   
+</div>

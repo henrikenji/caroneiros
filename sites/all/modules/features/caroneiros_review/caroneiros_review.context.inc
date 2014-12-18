@@ -17,6 +17,12 @@ function caroneiros_review_context_default_contexts() {
   $context->description = '';
   $context->tag = '';
   $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'user/*' => 'user/*',
+        '~user/*/*' => '~user/*/*',
+      ),
+    ),
     'user_page' => array(
       'values' => array(
         'view' => 'view',
@@ -38,7 +44,7 @@ function caroneiros_review_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 1;
+  $context->condition_mode = 0;
   $export['avaliacoes'] = $context;
 
   return $export;

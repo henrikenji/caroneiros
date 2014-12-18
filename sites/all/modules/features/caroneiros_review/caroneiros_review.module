@@ -7,16 +7,21 @@
 include_once 'caroneiros_review.features.inc';
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_menu().
  */
-function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
-    global $user;
-    
-    dpm($form);
-    
-    // Hide and set a default value for entity reference field
-    $form['field_user'][LANGUAGE_NONE]['#default_value'] = $user->uid;
-    $form['field_user'][LANGUAGE_NONE]['#access'] = FALSE;
+function caroneiros_review_menu() {
+    $items = array();
+
+    $items['user/%user/review'] = array(
+        'title' => t('Avaliação'),
+        'page callback' => 'caroneiros_review_form',
+        'page arguments' => array(1),
+        'access callback' => 'user_is_logged_in',
+        'file' => 'caroneiros_review.pages.inc',
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
 }
 
 /**
@@ -24,7 +29,6 @@ function caroneiros_review_form_review_node_form_alter(&$form, &$form_state) {
  */
  function caroneiros_review_preprocess_node(&$variables) {
     if ($variables['type'] == 'carona') {
-        dpm($variables);
         global $user;
         $nid = $variables['nid'];
         $account = user_load($variables['uid']);
@@ -70,4 +74,35 @@ function caroneiros_review_theme() {
     'template' => 'review-node-form',
   );
   return $items;
+}
+
+function caroneiros_review_preprocess_user_profile(&$variables) {
+    global $user;
+    if($user->uid != arg(1)) {
+        $uid = arg(1);
+        $variables['review'] = array(
+            '#markup' => l(
+                'Avalie este usuário', 
+                "user/$uid/review",
+                array(
+                    'query' => array('destination' => current_path()),
+                    'attributes' => array('class' => array('btn', 'btn-info')),
+                    'html' => TRUE,
+                )
+            ),
+            '#attached' => array(
+                'css' => array(
+                    drupal_get_path('module', 'caroneiros_review') . '/css/caroneiros_review.css',
+                ),
+            ),
+        );
+        
+        foreach ($variables['user_profile'] as $key => $value) {
+            $variables[$key] = $value;
+        }
+    }
+}
+
+function caroneiros_review_node_insert($node) {
+    //dpm($node);
 }
