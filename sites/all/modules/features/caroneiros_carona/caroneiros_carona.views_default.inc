@@ -90,14 +90,14 @@ function caroneiros_carona_views_default_views() {
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Destino */
-  $handler->display->display_options['fields']['field_destino']['id'] = 'field_destino';
-  $handler->display->display_options['fields']['field_destino']['table'] = 'field_data_field_destino';
-  $handler->display->display_options['fields']['field_destino']['field'] = 'field_destino';
   /* Field: Content: Origem */
   $handler->display->display_options['fields']['field_origem']['id'] = 'field_origem';
   $handler->display->display_options['fields']['field_origem']['table'] = 'field_data_field_origem';
   $handler->display->display_options['fields']['field_origem']['field'] = 'field_origem';
+  /* Field: Content: Destino */
+  $handler->display->display_options['fields']['field_destino']['id'] = 'field_destino';
+  $handler->display->display_options['fields']['field_destino']['table'] = 'field_data_field_destino';
+  $handler->display->display_options['fields']['field_destino']['field'] = 'field_destino';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -139,8 +139,8 @@ function caroneiros_carona_views_default_views() {
     t('last »'),
     t('author'),
     t('[field_nome] [field_tipo] carona'),
-    t('Destino'),
     t('Origem'),
+    t('Destino'),
     t('Page'),
   );
   $export['caronas_disponiveis'] = $view;
