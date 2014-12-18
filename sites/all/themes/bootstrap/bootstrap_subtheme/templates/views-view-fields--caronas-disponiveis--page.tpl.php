@@ -24,12 +24,12 @@
  * @ingroup views_templates
  */
 ?>
-<?php if (strpos($fields['field_tipo']->content, 'offer')): ?>
+<?php if (strpos($fields['field_tipo']->content, 'oferece')): ?>
 	<div style="padding:5px; background-color:#dff0d8; border:4px solid #5cb85c; height:100%;">
-<?php elseif (strpos($fields['field_tipo']->content, 'request')): ?>
+<?php elseif (strpos($fields['field_tipo']->content, 'solicita')): ?>
 	<div style="padding:5px; background-color:#d9edf7; border:4px solid #5bc0de; height:100%;">
 <?php else: ?>
-	<div style="padding:5px; background-color:#888; border:4px solid #333; height:100%;">
+	<div style="padding:5px; background-color:#f2dede; border:4px solid #d9534f; height:100%;">
 <?php endif; ?>
 	<div class="row" style="margin-bottom:20px;">
 		<div class="col-md-4">
