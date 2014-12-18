@@ -1,10 +1,13 @@
 name = Caroneiros: Orcamento
 core = 7.x
 package = Caroneiros
-version = 7.x-1.0
+version = 7.x-1.1
 project = caroneiros_orcamento
+dependencies[] = strongarm
 dependencies[] = webform
 __drupal_alter_by_ref[][node][webform] = webform
+features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[uuid_node][] = b09c20f8-73a4-4650-8e89-51a751ae96f8
+features[variable][] = comment_webform
 features_exclude[dependencies][caroneiros_fale_conosco] = caroneiros_fale_conosco
