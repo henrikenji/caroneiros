@@ -24,13 +24,38 @@
  * @ingroup views_templates
  */
 ?>
-<?php foreach ($fields as $id => $field): ?>
-  <?php if (!empty($field->separator)): ?>
-    <?php print $field->separator; ?>
-  <?php endif; ?>
-
-  <?php print $field->wrapper_prefix; ?>
-    <?php print $field->label_html; ?>
-    <?php print $field->content; ?>
-  <?php print $field->wrapper_suffix; ?>
-<?php endforeach; ?>
+<?php if (strpos($fields['field_tipo']->content, 'offer')): ?>
+	<div style="padding:5px; background-color:#dff0d8; border:4px solid #5cb85c; height:100%;">
+<?php elseif (strpos($fields['field_tipo']->content, 'request')): ?>
+	<div style="padding:5px; background-color:#d9edf7; border:4px solid #5bc0de; height:100%;">
+<?php else: ?>
+	<div style="padding:5px; background-color:#888; border:4px solid #333; height:100%;">
+<?php endif; ?>
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-md-4">
+			<?php print $fields['picture']->content; ?>
+		</div>
+		<div class="col-md-8">
+			<div>
+				<h4><?php print $fields['title']->content; ?></h4>
+			</div>
+			<span class="glyphicon glyphicon-calendar"></span>
+			<div style="display:inline-block; margin:5px 0 5px 0;">
+				<?php print $fields['field_data']->content; ?>
+			</div>
+			</br>
+			<span class="glyphicon glyphicon-user"></span>
+			<div style="display:inline-block;">
+				<?php print $fields['field_vagas']->content; ?>
+			</div>
+		</div>
+	</div>
+	<div>
+		<strong><?php print $fields['field_origem']->label_html; ?></strong>
+		<?php print $fields['field_origem']->content; ?>
+	</div>
+	<div>
+		<strong><?php print $fields['field_destino']->label_html; ?></strong>
+		<?php print $fields['field_destino']->content; ?>
+	</div>
+</div>

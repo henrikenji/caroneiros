@@ -141,6 +141,7 @@ function caroneiros_carona_cron() {
  * Implements hook_preprocess_views_view_fields().
  */
 function caroneiros_carona_preprocess_views_view_fields(&$variables) {
+
     if ($variables['view']->name == 'caronas_disponiveis') {
         $id = $variables['id'];
         $destino = $variables['view']->result[$id-1]->field_field_destino[0]['raw'];

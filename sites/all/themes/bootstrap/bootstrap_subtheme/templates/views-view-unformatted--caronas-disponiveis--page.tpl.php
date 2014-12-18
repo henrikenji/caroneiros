@@ -7,11 +7,15 @@
  * @ingroup views_templates
  */
 ?>
+
 <?php if (!empty($title)): ?>
-  <h3><?php print $title; ?></h3>
+	  <h3><?php print $title; ?></h3>
 <?php endif; ?>
+<div class="row" style="height:260px;">
 <?php foreach ($rows as $id => $row): ?>
-  <div class="col-md-4">
-    <?php print $row; ?>
-  </div>
+	<div class="col-md-4" style="height:100%;">
+		<?php print $row; ?>
+	</div>
 <?php endforeach; ?>
+
+	</div>
