@@ -11,7 +11,9 @@
             <?php print render($field_sexo); ?>
         </div>
     </div>
-    <div class="review">
-        <?php print render($review); ?>
-    </div>
+    <?php if (!empty($review)): ?>
+        <div class="review">
+            <?php print render($review); ?>
+        </div>
+    <?php endif;?>
 </div>

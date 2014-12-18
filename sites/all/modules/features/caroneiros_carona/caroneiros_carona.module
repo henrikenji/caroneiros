@@ -48,14 +48,14 @@ function caroneiros_carona_menu() {
 
         switch ($variables['field_tipo'][LANGUAGE_NONE][0]['value']) {
             case 'offer':
-                $variables['title'] = t('@user is offering a ride', array('@user' => $name));
+                $variables['title'] = t('@user está oferecendo carona', array('@user' => $name));
                 if ($user->uid != $account->uid && $variables['field_vagas'][0]['value'] > count($nodes)) {
-                    $variables['button'] = l(t('Request ride'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
+                    $variables['button'] = l(t('Pedir carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
                 }
                 break;
             case 'request':
-                $variables['title'] = t('@user is offering is looking for a ride', array('@user' => $name));
-                $variables['button'] = l(t('Offer ride'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
+                $variables['title'] = t('@user is pedindo carona', array('@user' => $name));
+                $variables['button'] = l(t('Ofereça carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
                 break;
         }
         

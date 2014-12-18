@@ -97,9 +97,11 @@ function caroneiros_review_preprocess_user_profile(&$variables) {
             ),
         );
         
-        foreach ($variables['user_profile'] as $key => $value) {
-            $variables[$key] = $value;
-        }
+    
+    }
+    
+    foreach ($variables['user_profile'] as $key => $value) {
+        $variables[$key] = $value;
     }
 }
 
