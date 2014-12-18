@@ -1,8 +1,10 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Caroneiros Usuário feature.
  */
+
+include_once 'caroneiros_usuario.features.inc';
 
 /**
  * Implements hook_form_FORM_ID_alter().
