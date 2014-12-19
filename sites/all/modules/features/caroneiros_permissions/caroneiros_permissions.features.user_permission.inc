@@ -20,6 +20,26 @@ function caroneiros_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'access gmap getdirections'.
+  $permissions['access gmap getdirections'] = array(
+    'name' => 'access gmap getdirections',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'getdirections',
+  );
+
+  // Exported permission: 'access user getdirections'.
+  $permissions['access user getdirections'] = array(
+    'name' => 'access user getdirections',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'getdirections',
+  );
+
   // Exported permission: 'create carona content'.
   $permissions['create carona content'] = array(
     'name' => 'create carona content',
@@ -96,6 +116,46 @@ function caroneiros_permissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'rate content'.
+  $permissions['rate content'] = array(
+    'name' => 'rate content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'fivestar',
+  );
+
+  // Exported permission: 'view node map'.
+  $permissions['view node map'] = array(
+    'name' => 'view node map',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'gmap_location',
+  );
+
+  // Exported permission: 'view user location details'.
+  $permissions['view user location details'] = array(
+    'name' => 'view user location details',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'gmap_location',
+  );
+
+  // Exported permission: 'view user map'.
+  $permissions['view user map'] = array(
+    'name' => 'view user map',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'gmap_location',
   );
 
   return $permissions;

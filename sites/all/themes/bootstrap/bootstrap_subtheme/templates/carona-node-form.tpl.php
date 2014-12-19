@@ -8,17 +8,17 @@
 			<div class="row">
 				<?php print render($form['field_vagas']); ?>
 			</div>
-			
+
 			<div class="row">
 				<?php print render($form['field_tipo']); ?>
 			</div>
 		</div>
-		
+
 		<div class="col-md-7">
 			<?php print render($form['field_data']); ?>
 		</div>
 	</div>
-	
+
     <div class="row">
         <div class="col-md-6">
             <?php //hide($form['field_origem']['und']['0']['locpick']['user_latitude']); ?>
@@ -43,8 +43,8 @@
             <?php print render($form['field_destino']); ?>
         </div>
     </div>
-    
-    <?php hide($form['additional_settings']['group']); ?>
+
+    <?php //hide($form['additional_settings']['group']); ?>
     <div class="text-center">
 		<?php print render($form['actions']); ?>
 	</div>
