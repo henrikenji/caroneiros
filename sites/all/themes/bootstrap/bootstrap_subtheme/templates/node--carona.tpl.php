@@ -24,7 +24,6 @@
             <p><span class="glyphicon glyphicon-calendar"></span> <?php print $date; ?></p>
             <p><span class="glyphicon glyphicon-time"></span> <?php print $hour; ?></p>
             <p><span class="glyphicon glyphicon-user"></span> <?php print $vaccancies; ?></p>
-            <!--<p><span class="glyphicon glyphicon-star"></span> <?php //print $distance; ?></p>-->
           </div>
         <?php endif; ?>    
       </div>
