@@ -35,7 +35,7 @@
   </div>
 
   <?php if (!empty($button)): ?>
-    <div class="request-carona">
+    <div class="request-carona" style="margin-top:450px">
       <?php print $button; ?>
     <div>
   <?php endif;?>
