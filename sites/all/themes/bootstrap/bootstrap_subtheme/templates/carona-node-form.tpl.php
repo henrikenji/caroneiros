@@ -4,7 +4,7 @@
     <?php hide($form['body']['und']['0']['format']); ?>
     <?php print render($form['body']); ?>
 	<div class="row">
-		<div class="col-md-5" style="padding-left:30px">
+		<div class="col-md-6" style="padding-left:30px; padding-right:30px">
 			<div class="row">
 				<?php print render($form['field_vagas']); ?>
 			</div>
@@ -14,7 +14,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-7">
+		<div class="col-md-6">
 			<?php print render($form['field_data']); ?>
 		</div>
 	</div>

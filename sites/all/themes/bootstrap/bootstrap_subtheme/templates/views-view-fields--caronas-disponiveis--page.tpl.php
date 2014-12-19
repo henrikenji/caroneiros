@@ -24,7 +24,7 @@
  * @ingroup views_templates
  */
 ?>
-<?php dpm($variables); ?>
+<?php //dpm($variables); ?>
 <?php if (strpos($fields['field_tipo']->content, 'oferece')): ?>
 	<div style="padding:5px; background-color:#dff0d8; border:4px solid #5cb85c; height:100%;">
 <?php elseif (strpos($fields['field_tipo']->content, 'solicita')): ?>
