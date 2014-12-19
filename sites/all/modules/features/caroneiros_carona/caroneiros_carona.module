@@ -77,12 +77,12 @@ function caroneiros_carona_accept_reject_request_access($node) {
             case 'offer':
                 $variables['title'] = t('@user está oferecendo carona', array('@user' => $name));
                 if ($user->uid != $account->uid && $variables['field_vagas'][0]['value'] > count($nodes)) {
-                    $variables['button'] = l(t('Pedir carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
+                    $variables['button'] = l(t('Solicitar carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-success'))));
                 }
                 break;
             case 'request':
-                $variables['title'] = t('@user is pedindo carona', array('@user' => $name));
-                $variables['button'] = l(t('Ofereça carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
+                $variables['title'] = t('@user está solicitando carona', array('@user' => $name));
+                $variables['button'] = l(t('Oferecer carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-success'))));
                 break;
         }
 
@@ -90,7 +90,7 @@ function caroneiros_carona_accept_reject_request_access($node) {
         $variables['date'] = $date;
         $variables['hour'] = $hour;
         $variables['vaccancies'] = $variables['field_vagas'][0]['value'] - count($nodes);
-        $variables['distance'] = 'TODO';
+        //$variables['distance'] = 'TODO';
 
         // Map
         $locations = getdirections_load_locations($variables['nid'], 'node');
