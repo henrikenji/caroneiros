@@ -67,7 +67,7 @@ function caroneiros_review_menu() {
 
 function caroneiros_review_theme() {
   $items = array();
-    
+
   $items['review_node_form'] = array(
     'render element' => 'form',
     'path' => drupal_get_path('theme', 'bootstrap') . '/boostrap_subtheme/templates',
@@ -77,34 +77,61 @@ function caroneiros_review_theme() {
 }
 
 function caroneiros_review_preprocess_user_profile(&$variables) {
-    global $user;
-    if($user->uid != arg(1)) {
-        $uid = arg(1);
-        $variables['review'] = array(
-            '#markup' => l(
-                'Avalie este usuário', 
-                "user/$uid/review",
-                array(
-                    'query' => array('destination' => current_path()),
-                    'attributes' => array('class' => array('btn', 'btn-info')),
-                    'html' => TRUE,
-                )
-            ),
-            '#attached' => array(
-                'css' => array(
-                    drupal_get_path('module', 'caroneiros_review') . '/css/caroneiros_review.css',
-                ),
-            ),
-        );
-        
-    
-    }
-    
-    foreach ($variables['user_profile'] as $key => $value) {
-        $variables[$key] = $value;
-    }
+  global $user;
+  if($user->uid != arg(1)) {
+    $uid = arg(1);
+    $variables['review'] = array(
+      '#markup' => l(
+        'Avalie este usuário',
+        "user/$uid/review",
+        array(
+          'query' => array('destination' => current_path()),
+          'attributes' => array('class' => array('btn', 'btn-info')),
+          'html' => TRUE,
+        )
+      ),
+      '#attached' => array(
+        'css' => array(
+          drupal_get_path('module', 'caroneiros_review') . '/css/caroneiros_review.css',
+        ),
+      ),
+    );
+  }
+
+  foreach ($variables['user_profile'] as $key => $value) {
+    $variables[$key] = $value;
+  }
+
+	$view = views_get_view('historico');
+	$title = $view->get_title();
+	$view->pre_execute();
+  $view->execute();
+
+  if (count($view->result)) {
+	  $variables['title'] = $title;
+    $variables['historico'] = $view->render();
+  }
+
+  $view = views_get_view('pedidos');
+  $title = $view->get_title();
+  $view->pre_execute();
+  $view->execute();
+
+  if ($view->result) {
+    $variables['caronas_title'] = $title;
+    $variables['caronas'] = $view->render();
+  }
+
+  $view = views_get_view('solicitacoes');
+  $title = $view->get_title();
+  $view->pre_execute();
+  $view->execute();
+
+  if (count($view->result)) {
+    $variables['solicitacao_title'] = $title;
+    $variables['solicitacao'] = $view->render();
+  }
 }
 
 function caroneiros_review_node_insert($node) {
-    //dpm($node);
 }

@@ -10,18 +10,45 @@ include_once 'caroneiros_carona.features.inc';
  * Implements hook_menu().
  */
 function caroneiros_carona_menu() {
-    $items = array();
+  $items = array();
 
-    $items['node/%node/request'] = array(
-        'title' => t('Request'),
-        'page callback' => 'drupal_get_form',
-        'page arguments' => array('caroneiros_carona_request_form', 1),
-        'access callback' => 'user_is_logged_in',
-        'file' => 'caroneiros_carona.pages.inc',
-        'type' => MENU_CALLBACK,
-    );
+  $items['node/%node/request'] = array(
+    'title' => t('Request'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('caroneiros_carona_request_form', 1),
+    'access callback' => 'user_is_logged_in',
+    'file' => 'caroneiros_carona.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
 
-    return $items;
+  $items['node/%node/confirm'] = array(
+    'title' => t('Request'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('caroneiros_carona_accept_request_form', 1),
+    'access callback' => 'caroneiros_carona_accept_reject_request_access',
+    'access arguments' => array(1),
+    'file' => 'caroneiros_carona.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['node/%node/reject'] = array(
+    'title' => t('Request'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('caroneiros_carona_reject_request_form', 1),
+    'access callback' => 'caroneiros_carona_accept_reject_request_access',
+    'access arguments' => array(1),
+    'file' => 'caroneiros_carona.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function caroneiros_carona_accept_reject_request_access($node) {
+  if ($node->type != 'request') {
+    return FALSE;
+  }
+  return TRUE;
 }
 
 /**
@@ -40,8 +67,8 @@ function caroneiros_carona_menu() {
                 ->propertyCondition('status', array(1), 'IN')
                 ->fieldCondition('field_carona', 'target_id', $nid)
                 ->execute();
-                
-        $nodes = array();        
+
+        $nodes = array();
         if (!empty($ids)) {
             $nodes = node_load_multiple(array_keys($ids['node']));
         }
@@ -58,21 +85,21 @@ function caroneiros_carona_menu() {
                 $variables['button'] = l(t('Ofereça carona'), "node/$nid/request", array('attributes' => array('class' => array('btn', 'btn-default'))));
                 break;
         }
-        
+
         list($date, $hour) = explode(' ', $variables['field_data'][0]['value']);
         $variables['date'] = $date;
         $variables['hour'] = $hour;
         $variables['vaccancies'] = $variables['field_vagas'][0]['value'] - count($nodes);
         $variables['distance'] = 'TODO';
-        
+
         // Map
         $locations = getdirections_load_locations($variables['nid'], 'node');
-        
+
         foreach ($locations as $location) {
             $locs[] = _getdirections_loadaddress($location);
             $latlons[] = $location['latitude'] . ',' . $location['longitude'];
         }
-        
+
         $getdirections_defaults = getdirections_defaults();
         $getdirections_misc = getdirections_misc_defaults();
         getdirections_setup_map($getdirections_defaults, $getdirections_misc);
@@ -81,7 +108,7 @@ function caroneiros_carona_menu() {
 
         $mapid = getdirections_get_key();
         drupal_add_js(array('getdirections' => array($mapid => $getdirections_settings)), 'setting');
-        
+
         $variables['content']['map'] = array(
             '#theme' => 'getdirections_show_locations_via',
             '#mapid' => $mapid,
@@ -125,8 +152,8 @@ function caroneiros_carona_cron() {
             ->propertyCondition('status', 1)
             ->fieldCondition('field_data', 'value', $date, '<=')
             ->execute();
-                
-    $nodes = array();        
+
+    $nodes = array();
     if (!empty($ids)) {
         $nodes = node_load_multiple(array_keys($ids['node']));
     }
